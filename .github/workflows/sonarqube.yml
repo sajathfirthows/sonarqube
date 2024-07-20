@@ -21,7 +21,7 @@ jobs:
       uses: actions/setup-java@v2
       with:
         java-version: '11'
-        distribution: 'temurin'  # or 'adopt', 'zulu', etc.
+        distribution: 'temurin'
 
     - name: Cache SonarQube packages
       uses: actions/cache@v2
@@ -36,11 +36,17 @@ jobs:
         curl -sSLo sonar-scanner-cli.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip
         unzip sonar-scanner-cli.zip -d $HOME
         export PATH="$HOME/sonar-scanner-4.6.2.2472-linux/bin:$PATH"
-        echo "PATH=$PATH"
-        
+        echo "PATH=$PATH"  # Debugging line
+
+    - name: Check SonarQube Scanner executable
+      run: |
+        ls -la $HOME/sonar-scanner-4.6.2.2472-linux/bin
+        which sonar-scanner
+
     - name: Run SonarQube Scanner
       run: |
         sonar-scanner \
           -Dsonar.projectKey=your_project_key \
           -Dsonar.host.url=http://10.0.1.80:9000 \
           -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+      shell: bash
