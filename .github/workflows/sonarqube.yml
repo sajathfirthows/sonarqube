@@ -21,6 +21,7 @@ jobs:
       uses: actions/setup-java@v2
       with:
         java-version: '11'
+        distribution: 'temurin'  # or 'adopt', 'zulu', etc.
 
     - name: Cache SonarQube packages
       uses: actions/cache@v2
