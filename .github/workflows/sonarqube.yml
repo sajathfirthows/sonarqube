@@ -41,5 +41,5 @@ jobs:
       run: |
         sonar-scanner \
           -Dsonar.projectKey=your_project_key \
-          -Dsonar.host.url=http://<your_ec2_instance_ip>:9000 \
+          -Dsonar.host.url=http://10.0.1.80:9000 \
           -Dsonar.login=${{ secrets.SONAR_TOKEN }}
